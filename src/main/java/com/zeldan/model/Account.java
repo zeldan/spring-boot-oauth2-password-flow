@@ -1,4 +1,4 @@
-package com.example.model;
+package com.zeldan.model;
 
 import java.util.Set;
 
