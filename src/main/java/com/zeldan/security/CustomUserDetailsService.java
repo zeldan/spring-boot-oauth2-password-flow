@@ -13,15 +13,21 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import com.zeldan.model.Account;
 import com.zeldan.model.Privilege;
 import com.zeldan.model.Role;
 import com.zeldan.repository.AccountRepository;
 
+@Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
+
+    public CustomUserDetailsService(final AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
