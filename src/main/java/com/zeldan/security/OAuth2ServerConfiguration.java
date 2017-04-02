@@ -1,7 +1,5 @@
 package com.zeldan.security;
 
-import javax.validation.constraints.NotNull;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
@@ -55,7 +53,7 @@ public class OAuth2ServerConfiguration {
         private AuthenticationManager authenticationManager;
 
         @Override
-        public void configure(@NotNull final AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        public void configure(final AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
             // @formatter:off
             endpoints
                 .tokenStore(new JwtTokenStore(jwtAccessTokenConverter))
@@ -65,7 +63,7 @@ public class OAuth2ServerConfiguration {
         }
 
         @Override
-        public void configure(@NotNull final ClientDetailsServiceConfigurer clients) throws Exception {
+        public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {
             // @formatter:off
             clients
                 .inMemory()
