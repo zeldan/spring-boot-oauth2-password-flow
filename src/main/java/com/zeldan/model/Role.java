@@ -1,44 +1,59 @@
 package com.zeldan.model;
 
+import static javax.persistence.FetchType.LAZY;
+
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Role {
 
-	@Id
-	private Long id;
+    @Id
+    @GeneratedValue
+    private Long roleId;
 
-	private String code;
+    private String name;
 
-	private String label;
+    private String description;
 
-	public Role() {
+    @ManyToMany(fetch = LAZY)
+    private Set<Privilege> privileges = new HashSet<>(0);
 
-	}
+    public Long getRoleId() {
+        return roleId;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public void setRoleId(final Long roleId) {
+        this.roleId = roleId;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getCode() {
-		return code;
-	}
+    public void setName(final String name) {
+        this.name = name;
+    }
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public String getLabel() {
-		return label;
-	}
+    public void setDescription(final String description) {
+        this.description = description;
+    }
 
-	public void setLabel(String label) {
-		this.label = label;
-	}
+    public Set<Privilege> getPrivileges() {
+        return privileges;
+    }
+
+    public void setPrivileges(final Set<Privilege> privileges) {
+        this.privileges = privileges;
+    }
 
 }
