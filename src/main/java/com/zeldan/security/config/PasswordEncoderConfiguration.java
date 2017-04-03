@@ -1,4 +1,4 @@
-package com.zeldan.security;
+package com.zeldan.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
