@@ -35,12 +35,13 @@ It will return something like that:
 ```
 {
 "access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0OTE0NjYxMTYsInVzZXJfbmFtZSI6InVzZXIiLCJhdXRob3JpdGllcyI6WyJQUklWSUxFR0VfVVNFUl9SRUFEIl0sImp0aSI6IjQ4MDVhZGQ3LWMzNTgtNDkzMC05ODkwLTEzNjNkNjJiZmQ0ZiIsImNsaWVudF9pZCI6ImNsaWVudCIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.7nMeIVuskhkmHXxX6CC6RZf9A_aXxsaoTXev6av4h64",
-"token_type":"bearer","refresh_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJ1c2VyIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sImF0aSI6IjQ4MDVhZGQ3LWMzNTgtNDkzMC05ODkwLTEzNjNkNjJiZmQ0ZiIsImV4cCI6MTQ5NDAxNDkxNiwiYXV0aG9yaXRpZXMiOlsiUFJJVklMRUdFX1VTRVJfUkVBRCJdLCJqdGkiOiI2MmU0MTU3Yy1hOWNiLTRlYjMtODg1Ni0wMmJhOWI1ZjQ3OWQiLCJjbGllbnRfaWQiOiJjbGllbnQifQ.1fexTQcFC80VkqbDo5zJfCzq0vbPPvJVPp8Nr3CwH68",
+"token_type":"bearer",
+"refresh_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJ1c2VyIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sImF0aSI6IjQ4MDVhZGQ3LWMzNTgtNDkzMC05ODkwLTEzNjNkNjJiZmQ0ZiIsImV4cCI6MTQ5NDAxNDkxNiwiYXV0aG9yaXRpZXMiOlsiUFJJVklMRUdFX1VTRVJfUkVBRCJdLCJqdGkiOiI2MmU0MTU3Yy1hOWNiLTRlYjMtODg1Ni0wMmJhOWI1ZjQ3OWQiLCJjbGllbnRfaWQiOiJjbGllbnQifQ.1fexTQcFC80VkqbDo5zJfCzq0vbPPvJVPp8Nr3CwH68",
 "expires_in":43199,
 "scope":"read write",
 "jti":"4805add7-c358-4930-9890-1363d62bfd4f"}
 ```
-From this, you need "access_token", you can check it via **jwt.io**.
+From this, you need "access_token", you can check what it contains exactly via **jwt.io**.
 
 3. add **Authorization** header, with Bearer <token>
 
@@ -54,7 +55,13 @@ OR
 curl -H "Authorization: bearer <token>" http://localhost:8080/admin
 ```
 
-Of course the http://localhost:8080/admin endpoint is accessible only for admin, and the http://localhost:8080/user is for user.
+Of course the http://localhost:8080/admin endpoint is accessible only by admin, and the http://localhost:8080/user is accessible only by user.
+If you try to access the wrong endpoint with your user, then you will get an error:
+{"error":"unauthorized","error_description":"Full authentication is required to access this resource"} 
+
+> Recommendation: 
+>    Use **Postman** instead of curl commands.
+
 
 ## Technology Stack
 
