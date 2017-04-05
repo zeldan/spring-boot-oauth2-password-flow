@@ -4,6 +4,7 @@ import java.util.Collections;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.zeldan.model.Account;
@@ -22,30 +23,36 @@ public class DefaultDataGenerator {
 
     private final PrivilegeRepository privilegeRepository;
 
-    public DefaultDataGenerator(final AccountRepository accountRepository, final RoleRepository roleRepository, final PrivilegeRepository privilegeRepository) {
+    private final PasswordEncoder passwordEncoder;
+
+    public DefaultDataGenerator(final AccountRepository accountRepository, final RoleRepository roleRepository, final PrivilegeRepository privilegeRepository,
+            final PasswordEncoder passwordEncoder) {
         this.accountRepository = accountRepository;
         this.roleRepository = roleRepository;
         this.privilegeRepository = privilegeRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostConstruct
     public void generateDefaultData() {
+        accountRepository.save(createAccount("admin", "admin", "PRIVILEGE_ADMIN_READ", "ROLE_ADMIN"));
+        accountRepository.save(createAccount("user", "user", "PRIVILEGE_USER_READ", "ROLE_USER"));
+    }
+
+    private Account createAccount(final String username, final String password, final String privilegeName, final String roleName) {
         final Privilege privilege = new Privilege();
-        privilege.setName("PRIVILEGE_READ");
-        privilege.setDescription("privilege read description");
+        privilege.setName(privilegeName);
         privilegeRepository.save(privilege);
 
         final Role role = new Role();
-        role.setName("ROLE_ADMIN");
-        role.setDescription("role admin description");
+        role.setName(roleName);
         role.setPrivileges(Collections.singleton(privilege));
         roleRepository.save(role);
 
         final Account account = new Account();
-        account.setUsername("username");
-        account.setPassword("$2a$06$aqwKPUsa2hxC8EfDgx1QX.D.DvIRPLjJJF75xWPaorj9vR8xY5fpS");
+        account.setUsername(username);
+        account.setPassword(passwordEncoder.encode(password));
         account.setRoles(Collections.singleton(role));
-        accountRepository.save(account);
+        return account;
     }
-
 }
