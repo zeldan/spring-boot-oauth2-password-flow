@@ -3,7 +3,7 @@
 It is a Spring Boot application, that contains all necessary configurations to be able to try oauth2 authorization (password flow).
 It uses JWT token key for the authorization.
 
-There is a **hsql** embedded database in the application by default, and it contains two default users (they are uploaded by **DefaultDataGenerator.java**) 
+There is a **hsql** embedded database in the application by default, and it contains two default users (they are uploaded by **resources/data.sql**) 
 
 **admin / admin**
   - role: ROLE_ADMIN
