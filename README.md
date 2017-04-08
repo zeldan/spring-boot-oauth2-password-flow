@@ -3,7 +3,7 @@
 It is a Spring Boot application, that contains all necessary configurations to be able to try oauth2 authorization (password flow).
 It uses JWT token key for the authorization.
 
-There is a **hsql** embedded database in the application, and it contains two default users (they are uploaded by **DefaultDataGenerator.java**) 
+There is a **hsql** embedded database in the application by default, and it contains two default users (they are uploaded by **DefaultDataGenerator.java**) 
 
 **admin / admin**
   - role: ROLE_ADMIN
@@ -13,10 +13,21 @@ There is a **hsql** embedded database in the application, and it contains two de
   - role: ROLE_USER
   - privilege: PRIVILEGE_USER_READ
 
+You can choose postgres instead of hsql, you have to change active spring profile to **postgres**.
 
 ## Try it
 
-1. mvnw spring-boot:run
+1. start the spring-boot app 
+```
+mvnw spring-boot:run 
+```
+
+OR 
+
+```
+mvnw spring-boot:run -Dspring.profiles.active=postgres
+```
+
 2. **get access_token** for
 
 admin
