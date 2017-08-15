@@ -73,8 +73,27 @@ If you try to access the wrong endpoint with your user, then you will get an err
 > Recommendation: 
 >    Use **Postman** instead of curl commands.
 
+## FAQ
+
+1. How to add new user
+
+If you want to add a new user, then you have to add a new line in data.sql:
+
+```  
+INSERT INTO account (id, enabled, username, password) VALUES (3, true, <username>, <encryptedPassword>);
+```
+
+To generate encryptedPassword, you can use online bcrypt hash generator (e.g.: https://www.dailycred.com/article/bcrypt-calculator) or you can generate it with Spring Boot BCryptPasswordEncoder (https://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/crypto/bcrypt/BCryptPasswordEncoder.html).
+
+After that you have to insert new user into account_roles, based on what role you want to add to the user (role 1 = admin, role 2 = user).
+
+```
+INSERT INTO account_roles (account_id, roles_role_id) VALUES (3, 1);
+```
+
+
 
 ## Technology Stack
 
 * Java 8
-* Spring boot 1.5.2
+* Spring boot 1.5.6
