@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -49,6 +50,9 @@ public class OAuth2ServerConfiguration {
         private JwtAccessTokenConverter jwtAccessTokenConverter;
 
         @Autowired
+        private BCryptPasswordEncoder passwordEncoder;
+        
+        @Autowired
         @Qualifier("authenticationManagerBean")
         private AuthenticationManager authenticationManager;
 
@@ -68,12 +72,11 @@ public class OAuth2ServerConfiguration {
             clients
                 .inMemory()
                 .withClient("client")
-                .secret("secret")
+                .secret(passwordEncoder.encode("secret"))
                 .authorizedGrantTypes("password", "refresh_token")
                 .scopes("read", "write");
             // @formatter:on
         }
 
     }
-
 }
