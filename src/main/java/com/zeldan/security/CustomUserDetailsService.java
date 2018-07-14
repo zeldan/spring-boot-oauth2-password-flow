@@ -39,9 +39,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (account.getRoles() == null || account.getRoles().isEmpty()) {
             throw new UsernameNotFoundException("User not authorized.");
         }
-        final User userDetails = new User(account.getUsername(), account.getPassword(), account.isEnabled(), true, true, true,
-                getAuthorities(account.getRoles()));
-        return userDetails;
+        return new User(account.getUsername(), account.getPassword(), account.isEnabled(), true, true, true, getAuthorities(account.getRoles()));
     }
 
     private Collection<? extends GrantedAuthority> getAuthorities(final Collection<Role> roles) {

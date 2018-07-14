@@ -1,7 +1,5 @@
 package com.zeldan.security.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -23,8 +21,11 @@ public class OAuth2ServerConfiguration {
     @EnableResourceServer
     protected static class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
-        @Autowired
-        private JwtAccessTokenConverter jwtAccessTokenConverter;
+        private final JwtAccessTokenConverter jwtAccessTokenConverter;
+
+        public ResourceServerConfiguration(JwtAccessTokenConverter jwtAccessTokenConverter) {
+            this.jwtAccessTokenConverter = jwtAccessTokenConverter;
+        }
 
         @Override
         public void configure(final ResourceServerSecurityConfigurer resources) {
@@ -46,36 +47,36 @@ public class OAuth2ServerConfiguration {
     @EnableAuthorizationServer
     protected static class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
-        @Autowired
-        private JwtAccessTokenConverter jwtAccessTokenConverter;
+        private final JwtAccessTokenConverter jwtAccessTokenConverter;
 
-        @Autowired
-        private BCryptPasswordEncoder passwordEncoder;
-        
-        @Autowired
-        @Qualifier("authenticationManagerBean")
-        private AuthenticationManager authenticationManager;
+        private final BCryptPasswordEncoder passwordEncoder;
+
+        private final AuthenticationManager authenticationManager;
+
+        public AuthorizationServerConfiguration(JwtAccessTokenConverter jwtAccessTokenConverter,
+                                                BCryptPasswordEncoder passwordEncoder,
+                                                AuthenticationManager authenticationManager) {
+            this.jwtAccessTokenConverter = jwtAccessTokenConverter;
+            this.passwordEncoder = passwordEncoder;
+            this.authenticationManager = authenticationManager;
+        }
 
         @Override
         public void configure(final AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-            // @formatter:off
             endpoints
-                .tokenStore(new JwtTokenStore(jwtAccessTokenConverter))
-                .authenticationManager(authenticationManager)
-                .accessTokenConverter(jwtAccessTokenConverter);
-            // @formatter:on
+                    .tokenStore(new JwtTokenStore(jwtAccessTokenConverter))
+                    .authenticationManager(authenticationManager)
+                    .accessTokenConverter(jwtAccessTokenConverter);
         }
 
         @Override
         public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {
-            // @formatter:off
             clients
-                .inMemory()
-                .withClient("client")
-                .secret(passwordEncoder.encode("secret"))
-                .authorizedGrantTypes("password", "refresh_token")
-                .scopes("read", "write");
-            // @formatter:on
+                    .inMemory()
+                    .withClient("client")
+                    .secret(passwordEncoder.encode("secret"))
+                    .authorizedGrantTypes("password", "refresh_token")
+                    .scopes("read", "write");
         }
 
     }
