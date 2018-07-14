@@ -17,7 +17,12 @@ You can choose postgres instead of hsql, you have to change active spring profil
 
 ## Try it
 
-1. start the spring-boot app 
+1. Init database (postgresql sql shell)
+```
+CREATE DATABASE zeldan;
+```
+
+2. start the spring-boot app 
 ```
 mvnw spring-boot:run 
 ```
@@ -28,7 +33,7 @@ OR
 mvnw spring-boot:run -Dspring.profiles.active=postgres
 ```
 
-2. **get access_token** for
+3. **get access_token** for
 
 admin
 
@@ -54,7 +59,7 @@ It will return something like that:
 ```
 From this, you need "access_token", you can check what it contains exactly via **jwt.io**.
 
-3. add **Authorization** header, with Bearer <token>
+4. add **Authorization** header, with Bearer <token>
 
 ```
 curl -H "Authorization: bearer <token>" http://localhost:8080/user
