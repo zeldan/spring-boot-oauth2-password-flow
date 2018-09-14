@@ -23,15 +23,16 @@ CREATE DATABASE zeldan;
 ```
 
 2. start the spring-boot app 
-```
-mvnw spring-boot:run 
-```
-```
-mvnw spring-boot:run -Dspring.profiles.active=postgres
-```
-```
-mvnw spring-boot:run -Dspring.profiles.active=mysql
-```
+
+```mvnw spring-boot:run ```
+
+OR
+
+```mvnw spring-boot:run -Dspring.profiles.active=postgres```
+
+OR
+
+```mvnw spring-boot:run -Dspring.profiles.active=mysql```
 
 3. **get access_token** for
 
