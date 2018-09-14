@@ -13,11 +13,11 @@ There is a **hsql** embedded database in the application by default, and it cont
   - role: ROLE_USER
   - privilege: PRIVILEGE_USER_READ
 
-You can choose postgres instead of hsql, you have to change active spring profile to **postgres**.
+You can choose postgres or mysql instead of hsql, you have to change active spring profile to **postgres** or **mysql**.
 
 ## Try it
 
-1. Init database (postgresql sql shell)
+1. Init database (postgresql / mysql sql shell)
 ```
 CREATE DATABASE zeldan;
 ```
@@ -26,11 +26,11 @@ CREATE DATABASE zeldan;
 ```
 mvnw spring-boot:run 
 ```
-
-OR 
-
 ```
 mvnw spring-boot:run -Dspring.profiles.active=postgres
+```
+```
+mvnw spring-boot:run -Dspring.profiles.active=mysql
 ```
 
 3. **get access_token** for
@@ -101,4 +101,4 @@ INSERT INTO account_roles (account_id, roles_role_id) VALUES (3, 1);
 ## Technology Stack
 
 * Java 8
-* Spring boot 2.0.3
+* Spring boot 2.0.5
