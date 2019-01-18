@@ -48,7 +48,7 @@ user
 curl -X POST -vu client:secret http://localhost:8080/oauth/token -H "Accept: application/json" -d "password=user&username=user&grant_type=password&scope=read%20write&client_secret=secret&client_id=client"
 ```
 
-It will return something like that:
+It will return with the bearer access_token. An example:
 ```
 {
 "access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0OTE0NjYxMTYsInVzZXJfbmFtZSI6InVzZXIiLCJhdXRob3JpdGllcyI6WyJQUklWSUxFR0VfVVNFUl9SRUFEIl0sImp0aSI6IjQ4MDVhZGQ3LWMzNTgtNDkzMC05ODkwLTEzNjNkNjJiZmQ0ZiIsImNsaWVudF9pZCI6ImNsaWVudCIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.7nMeIVuskhkmHXxX6CC6RZf9A_aXxsaoTXev6av4h64",
@@ -102,4 +102,4 @@ INSERT INTO account_roles (account_id, roles_role_id) VALUES (3, 1);
 ## Technology Stack
 
 * Java 8
-* Spring boot 2.1.0
+* Spring boot 2.1.2
