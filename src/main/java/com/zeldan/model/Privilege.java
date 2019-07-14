@@ -19,7 +19,7 @@ public class Privilege {
         return privilegeId;
     }
 
-    public void setPrivilegeId(final long privilegeId) {
+    public void setPrivilegeId(long privilegeId) {
         this.privilegeId = privilegeId;
     }
 
@@ -27,7 +27,7 @@ public class Privilege {
         return name;
     }
 
-    public void setName(final String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -35,7 +35,7 @@ public class Privilege {
         return description;
     }
 
-    public void setDescription(final String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 

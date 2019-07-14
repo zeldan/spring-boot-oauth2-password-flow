@@ -1,14 +1,13 @@
 package com.zeldan.model;
 
-import static javax.persistence.FetchType.LAZY;
-
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import java.util.HashSet;
+import java.util.Set;
+
+import static javax.persistence.FetchType.LAZY;
 
 @Entity
 public class Role {
@@ -28,7 +27,7 @@ public class Role {
         return roleId;
     }
 
-    public void setRoleId(final Long roleId) {
+    public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
 
@@ -36,7 +35,7 @@ public class Role {
         return name;
     }
 
-    public void setName(final String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -44,7 +43,7 @@ public class Role {
         return description;
     }
 
-    public void setDescription(final String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -52,7 +51,7 @@ public class Role {
         return privileges;
     }
 
-    public void setPrivileges(final Set<Privilege> privileges) {
+    public void setPrivileges(Set<Privilege> privileges) {
         this.privileges = privileges;
     }
 

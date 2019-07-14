@@ -15,13 +15,13 @@ public class AccountAuthenticationProvider extends AbstractUserDetailsAuthentica
 
     private final PasswordEncoder passwordEncoder;
 
-    public AccountAuthenticationProvider(final CustomUserDetailsService userDetailsService, final PasswordEncoder passwordEncoder) {
+    public AccountAuthenticationProvider(CustomUserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
         this.userDetailsService = userDetailsService;
         this.passwordEncoder = passwordEncoder;
     }
 
     @Override
-    protected void additionalAuthenticationChecks(final UserDetails userDetails, final UsernamePasswordAuthenticationToken token)
+    protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken token)
             throws AuthenticationException {
         if (token.getCredentials() == null || userDetails.getPassword() == null) {
             throw new BadCredentialsException("Credentials may not be null.");
@@ -32,7 +32,7 @@ public class AccountAuthenticationProvider extends AbstractUserDetailsAuthentica
     }
 
     @Override
-    protected UserDetails retrieveUser(final String username, final UsernamePasswordAuthenticationToken token) throws AuthenticationException {
+    protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken token) throws AuthenticationException {
         return userDetailsService.loadUserByUsername(username);
     }
 

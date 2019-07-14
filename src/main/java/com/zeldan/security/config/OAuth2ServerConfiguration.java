@@ -28,13 +28,13 @@ public class OAuth2ServerConfiguration {
         }
 
         @Override
-        public void configure(final ResourceServerSecurityConfigurer resources) {
+        public void configure(ResourceServerSecurityConfigurer resources) {
             resources
                     .tokenStore(new JwtTokenStore(jwtAccessTokenConverter));
         }
 
         @Override
-        public void configure(final HttpSecurity http) throws Exception {
+        public void configure(HttpSecurity http) throws Exception {
             http
                     .csrf().disable()
                     .authorizeRequests()
@@ -62,7 +62,7 @@ public class OAuth2ServerConfiguration {
         }
 
         @Override
-        public void configure(final AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
             endpoints
                     .tokenStore(new JwtTokenStore(jwtAccessTokenConverter))
                     .authenticationManager(authenticationManager)
@@ -70,7 +70,7 @@ public class OAuth2ServerConfiguration {
         }
 
         @Override
-        public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {
+        public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
             clients
                     .inMemory()
                     .withClient("client")

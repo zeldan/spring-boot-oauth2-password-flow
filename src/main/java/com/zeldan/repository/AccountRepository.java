@@ -1,12 +1,11 @@
 package com.zeldan.repository;
 
-import java.util.Optional;
-
+import com.zeldan.model.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.zeldan.model.Account;
+import java.util.Optional;
 
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
-    Optional<Account> findByUsername(final String username);
+    Optional<Account> findByUsername(String username);
 }

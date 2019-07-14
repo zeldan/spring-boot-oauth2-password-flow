@@ -1,13 +1,7 @@
 package com.zeldan.model;
 
+import javax.persistence.*;
 import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
 @Entity
 public class Account {
@@ -34,7 +28,7 @@ public class Account {
         return id;
     }
 
-    public void setId(final Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -42,7 +36,7 @@ public class Account {
         return username;
     }
 
-    public void setUsername(final String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
@@ -50,7 +44,7 @@ public class Account {
         return password;
     }
 
-    public void setPassword(final String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -58,7 +52,7 @@ public class Account {
         return roles;
     }
 
-    public void setRoles(final Set<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 
@@ -66,7 +60,7 @@ public class Account {
         return enabled;
     }
 
-    public void setEnabled(final boolean enabled) {
+    public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 }

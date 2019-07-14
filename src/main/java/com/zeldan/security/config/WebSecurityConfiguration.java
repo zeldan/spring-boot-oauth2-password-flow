@@ -1,5 +1,7 @@
 package com.zeldan.security.config;
 
+import com.zeldan.security.AccountAuthenticationProvider;
+import com.zeldan.security.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -8,9 +10,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-
-import com.zeldan.security.AccountAuthenticationProvider;
-import com.zeldan.security.CustomUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
@@ -23,13 +22,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final AccountAuthenticationProvider accountAuthenticationProvider;
 
-    public WebSecurityConfiguration(final CustomUserDetailsService userDetailsService, final AccountAuthenticationProvider accountAuthenticationProvider) {
+    public WebSecurityConfiguration(CustomUserDetailsService userDetailsService, AccountAuthenticationProvider accountAuthenticationProvider) {
         this.userDetailsService = userDetailsService;
         this.accountAuthenticationProvider = accountAuthenticationProvider;
     }
 
     @Override
-    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
         auth.authenticationProvider(accountAuthenticationProvider);
     }
@@ -42,7 +41,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
-        final JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
+        JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
         jwtAccessTokenConverter.setSigningKey(SIGNING_KEY);
         return jwtAccessTokenConverter;
     }
