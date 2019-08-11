@@ -102,4 +102,4 @@ INSERT INTO account_roles (account_id, roles_role_id) VALUES (3, 1);
 ## Technology Stack
 
 * Java 8
-* Spring boot 2.1.6
+* Spring boot 2.1.7
